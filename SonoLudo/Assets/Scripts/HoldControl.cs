@@ -5,6 +5,7 @@ using UnityEngine;
 public class HoldControl : MonoBehaviour
 {
     public GlobalData gd;
+    public GameObject HoldCon, HoldUp, HoldMid, HoldDown;
     int length;
 
     bool inexit;
@@ -17,7 +18,8 @@ public class HoldControl : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        transform.Translate(0, -gd.speed, 0);
+        //transform.Translate(0, -gd.speed, 0);
+        updateLen();
         if (this.transform.position.y < gd.location.w && !inexit)
         { //Miss
 
@@ -48,6 +50,12 @@ public class HoldControl : MonoBehaviour
         }
 
 
+    }
+
+    void updateLen()
+    {
+        HoldUp.transform.position = new Vector3(HoldUp.transform.position.x, HoldMid.GetComponent<Renderer>().bounds.size.y / 2 , HoldUp.transform.position.z);
+        Debug.Log(HoldMid.GetComponent<Renderer>().bounds.size.y);
     }
 
     public void exit()
